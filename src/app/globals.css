@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.maximized {
+  inset: 0;
+  position: absolute;
+  border-radius: 0;
+  overflow: hidden;
+}
