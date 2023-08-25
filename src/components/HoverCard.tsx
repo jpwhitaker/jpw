@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef, MouseEvent, MouseEventHandler } from 'react';
-import { motion, Transition } from "framer-motion";
+import { motion, useMotionValue, Transition } from "framer-motion";
 import styles from './HoverCard.module.css';
 
 
@@ -8,6 +8,12 @@ import styles from './HoverCard.module.css';
 const HoverCard = ({ i }: { i: number }) => {
   const [isMaximized, setisMaximized] = useState<boolean>(false);
   const [isHovered, setHovered] = useState(false)
+  const [mouseX, setMouseX] = useState(0);
+  const [mouseY, setMouseY] = useState(0);
+  const cardRef = useRef<HTMLDivElement>(null)
+  const transform = useMotionValue('rotateX(0deg)');
+  const angle = 40;
+
 
   const message = ['ho', 'brah', 'sup', "ka'a", 'and', 'angelo', '!', ''];
 
@@ -15,9 +21,7 @@ const HoverCard = ({ i }: { i: number }) => {
     setisMaximized(!isMaximized);
   };
 
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
-  const cardRef = useRef<HTMLDivElement>(null)
+
 
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -33,17 +37,35 @@ const HoverCard = ({ i }: { i: number }) => {
       const cardCenterY = rect.top + rect.height / 2;
 
       // Calculate mouse coordinates relative to the center of the card
-      const relativeX = Math.trunc(x - cardCenterX);
-      const relativeY = Math.trunc(y - cardCenterY);
+      const relativeX = Math.round(x - cardCenterX);
+      const relativeY = Math.round(y - cardCenterY);
       // Update state
       setMouseX(relativeX);
       setMouseY(relativeY);
-      // console.log(`x: ${mouseX} y: ${mouseY}`)
     };
   };
 
+  
+
+
+  //rotation
   useEffect(() => {
-    console.log(`x: ${mouseX} y: ${mouseY}`);
+    // console.log(`x: ${mouseX} y: ${mouseY}`);
+    const theta = Math.atan2(mouseX, mouseY)
+
+    if (cardRef.current) {
+      const rect = cardRef.current.getBoundingClientRect();
+      const width = rect.width
+      const height = rect.height
+      const degX = width/angle
+      const degY = height / angle
+      const rx = -(mouseY / degY)
+      const ry = (mouseX / degX)
+      var newTransform = 'perspective(1000px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+      transform.set(newTransform);
+    }
+
+    
   }, [mouseX, mouseY]);
 
 
@@ -54,15 +76,15 @@ const HoverCard = ({ i }: { i: number }) => {
         
         {/** Main motion div, grows and shrinks on hover, on click grows to full screen **/}
         <motion.div
-          // onMouseMove={handleMouseMove}
+          onMouseMove={handleMouseMove}
           layout={true}
           transition={trans}
-          whileHover={isMaximized ? undefined : { scale: 1.1 }}
-          initial={{ borderRadius: 8 }}  // Initial border-radius value
+          // whileHover={}
+          style={{transform}}
           animate={{
-            borderRadius: isMaximized ? 0 : 8,  // Final border-radius value based on the state
+            
           }}
-          className={`bg-black  h-full p-4  ${isMaximized ? 'maximized' : ''}`}
+          className={`bg-black  h-full p-4`}
           onClick={() => handleClick()}
         >
           {/** Inner Content, shifts position with same transition speed **/}
