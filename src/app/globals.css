@@ -31,4 +31,5 @@ body {
   position: absolute;
   border-radius: 0;
   overflow: hidden;
+  z-index: 1;
 }

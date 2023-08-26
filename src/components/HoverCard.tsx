@@ -4,21 +4,23 @@ import styles from './HoverCard.module.css';
 
 const HoverCard = ({ i }: { i: number }) => {
   const [isMaximized, setisMaximized] = useState<boolean>(false);
-  const [isHovered, setHovered] = useState(false)
+  
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const [rx, setRx] = useState(0);
   const [ry, setRy] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null)
-  const transform = useMotionValue('rotateX(0deg)');
+  
 
   const angle = 40;
 
-  const message = ['1', '2', '3', "4", '5', '6', '!', ''];
+  const message = ['bg-red-400', 'bg-blue-400', 'bg-green-400', "bg-purple-400", 'bg-orange-400', 'bg-pink-400', 'bg-yellow-400', ''];
 
   const handleClick = () => {
     setisMaximized(!isMaximized);
   };
+
+
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     // Get mouse coordinates relative to the page
@@ -54,38 +56,37 @@ const HoverCard = ({ i }: { i: number }) => {
       const rect = cardRef.current.getBoundingClientRect();
       const width = rect.width
       const height = rect.height
-      const degX = width/angle
+      const degX = width / angle
       const degY = height / angle
-      setRx( -(mouseY / degY))
+      setRx(-(mouseY / degY))
       setRy(mouseX / degX)
       // var newTransform = 'perspective(1000px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
       // transform.set(newTransform);
     }
   }, [mouseX, mouseY]);
 
-
   return (
     <>
       {/** Outer container div, constricts inner child motion div **/}
-      <div ref={cardRef} className={`rounded-[8px] aspect-[16/9]`} style={{ transform: "perspective(1000px)"}}>
-        
+      <div ref={cardRef} className={`rounded-[8px] aspect-[16/9]`} >
+
         {/** Main motion div, grows and shrinks on hover, on click grows to full screen **/}
         <motion.div
           onMouseMove={handleMouseMove}
           layout={true}
           transition={trans}
           onMouseLeave={handleMouseLeave}
-          initial={{ 
+          initial={{
             rotateX: 0,
             rotateY: 0,
             transformPerspective: 1000
-           }} 
+          }}
           animate={{
-            rotateX: rx,
-            rotateY: ry,
+            rotateX: isMaximized ? 0 : rx,
+            rotateY: isMaximized ? 0 : ry,
             transformPerspective: 1000
           }}
-          className={`rounded-[8px] bg-black  h-full p-4 ${isMaximized ? 'maximized' : ''}`}
+          className={`rounded-[8px] ${message[i]}   h-full p-4 ${isMaximized ? 'maximized' : ''}`}
           onClick={() => handleClick()}
         >
           {/** Inner Content, shifts position with same transition speed **/}
