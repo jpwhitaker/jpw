@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, MouseEvent } from 'react';
 import { motion, useMotionValue, Transition } from "framer-motion";
+import styles from './HoverCard.module.css';
 
 const HoverCard = ({ i }: { i: number }) => {
   const [isMaximized, setisMaximized] = useState<boolean>(false);
@@ -73,7 +74,6 @@ const HoverCard = ({ i }: { i: number }) => {
           onMouseMove={handleMouseMove}
           layout={true}
           transition={trans}
-          // whileHover={}
           onMouseLeave={handleMouseLeave}
           initial={{ 
             rotateX: 0,
@@ -85,7 +85,7 @@ const HoverCard = ({ i }: { i: number }) => {
             rotateY: ry,
             transformPerspective: 1000
           }}
-          className={`bg-black  h-full p-4`}
+          className={`rounded-[8px] bg-black  h-full p-4 ${isMaximized ? 'maximized' : ''}`}
           onClick={() => handleClick()}
         >
           {/** Inner Content, shifts position with same transition speed **/}
