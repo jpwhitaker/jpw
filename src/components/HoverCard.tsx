@@ -1,38 +1,46 @@
-import { useState, useEffect, useRef, MouseEvent } from 'react';
-import { motion, useMotionValue, Transition } from "framer-motion";
+import { useState } from 'react';
+import { motion, AnimatePresence, Transition } from 'framer-motion';
 import styles from './HoverCard.module.css';
 
 const HoverCard = ({ i }: { i: number }) => {
-  const [isMaximized, setisMaximized] = useState<boolean>(false);
+  const [isMaximized, setIsMaximized] = useState<boolean>(false);
 
-  const message = ['bg-red-400', 'bg-blue-400', 'bg-green-400', "bg-purple-400", 'bg-orange-400', 'bg-pink-400', 'bg-yellow-400', ''];
+  const message = ['bg-red-400', 'bg-blue-400', 'bg-green-400', 'bg-purple-400', 'bg-orange-400', 'bg-pink-400', 'bg-yellow-400', ''];
+
+  const containerStyle = isMaximized ? 'fixed inset-0 z-50' : ' aspect-[16/9]';
+  const motionDivStyle = isMaximized ? 'h-screen w-screen' : 'h-full';
 
   return (
-    <>
-      {/** Outer container div, constricts inner child motion div **/}
-      <div  className={`rounded-[8px] aspect-[16/9]`} >
-
-        {/** Main motion div, grows and shrinks on hover, on click grows to full screen **/}
-        <motion.div
-          whileHover={{ cursor: 'pointer' }}
-          layout={true}
-          transition={trans}
-          className={`${message[i]}   h-full p-4 }`}
-        >
-          {/** Inner Content, shifts position with same transition speed **/}
+    <div className="  aspect-[16/9]">
+    <AnimatePresence>
+      
+        <div className={containerStyle} onClick={() => setIsMaximized(!isMaximized)}>
           <motion.div
+            initial={{ borderRadius: isMaximized ? 0 : 8 }}
+            animate={{ borderRadius: isMaximized ? 0 : 8  }}
+            exit={{ opacity: 0 }}
+            whileHover={{ cursor: 'pointer' }}
+            layout
             transition={trans}
-            layout="position"
-            className="text-white">
-            {message[i]}</motion.div>
-        </motion.div>
-      </div >
-    </>
-  )
-}
+            className={`${message[i]} ${motionDivStyle} p-4`}
+          >
+            <motion.div
+              transition={trans}
+              layout="position"
+              className="text-white"
+            >
+              {message[i]}
+            </motion.div>
+          </motion.div>
+        </div>
+      
+    </AnimatePresence>
+    </div>
+  );
+};
 
 const trans: Transition = {
   duration: 0.2
-}
+};
 
-export default HoverCard
+export default HoverCard;
