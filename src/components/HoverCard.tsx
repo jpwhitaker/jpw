@@ -24,17 +24,17 @@ const HoverCard = ({ i, children }: { i: number; children: React.ReactNode }) =>
     <div className="aspect-[16/9]">
       <AnimatePresence>
         <div className={containerStyle} onClick={() => {
-           if (isMaximized === false) setZIndex('z-[100]');
-           setIsMaximized(!isMaximized)
-           
-          }}>
+          if (isMaximized === false) setZIndex('z-[100]');
+          setIsMaximized(!isMaximized)
+
+        }}>
           <motion.div
             initial={{ borderRadius: isMaximized ? 0 : 8 }}
             animate={{ borderRadius: isMaximized ? 0 : 8 }}
             onAnimationComplete={() => {
               if (isMaximized === false) setZIndex('z-[0]');
               if (isMaximized === true) setZIndex('z-[100]');
-              
+
             }}
             exit={{ opacity: 0 }}
             whileHover={{ cursor: 'pointer' }}
@@ -42,14 +42,10 @@ const HoverCard = ({ i, children }: { i: number; children: React.ReactNode }) =>
             transition={trans}
             className={`${message[i]} ${motionDivStyle}`}
           >
-            <motion.div
-              transition={trans}
-              layout="position"
-              className="text-white"
-            >
+
               {/* RotateCard is assumed to be defined elsewhere */}
               <RotateCard isMaximized={isMaximized} message={message[i]}>{message[i]}</RotateCard>
-            </motion.div>
+
           </motion.div>
         </div>
       </AnimatePresence>
@@ -126,40 +122,19 @@ const RotateCard = ({ isMaximized, message, children }: { isMaximized: boolean, 
 
   return (
     <>
-      {/** Outer container div, constricts inner child motion div **/}
-      <motion.div ref={cardRef} className={`rounded-[8px] aspect-[16/9] h-full`} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}
-      >
-        {/** Main motion div, grows and shrinks on hover, on click grows to full screen **/}
-        <motion.div
-          layout={true}
-          transition={trans}
-
-          initial={{
-            rotateX: 0,
-            rotateY: 0,
-            transformPerspective: 1000,
-          }}
-          animate={{
-            rotateX: isMaximized ? 0 : rx,
-            rotateY: isMaximized ? 0 : ry,
-            transformPerspective: 1000,
-          }}
-          className='h-full'
-        >
-          {/** Inner Content, shifts position with same transition speed **/}
-          <motion.div
-            transition={trans}
-            layout={true}
-            className={`text-white border-indigo-500 border-2 h-full rounded-[8px] p-4`}
-          >
+      
             <motion.div
-              layout='position'>
-              {children}
+              className={`text-white border-indigo-500 border-2 h-full w-full rounded-[8px] p-4`}
+              transition={trans}
+              layout>
+              <motion.div
+              className='h-full'
+              layout="position">
+                {children}
+              </motion.div>
             </motion.div>
 
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          
     </>
   );
 };
