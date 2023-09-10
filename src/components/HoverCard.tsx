@@ -4,13 +4,14 @@ import styles from './HoverCard.module.css';
 
 const HoverCard = ({ i }: { i: number }) => {
   const [isMaximized, setisMaximized] = useState<boolean>(false);
-  
+  const [zIndex, setZIndex] = useState<number>(0);
+
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const [rx, setRx] = useState(0);
   const [ry, setRy] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null)
-  
+
 
   const angle = 40;
 
@@ -18,9 +19,29 @@ const HoverCard = ({ i }: { i: number }) => {
 
   const handleClick = () => {
     setisMaximized(!isMaximized);
+    if (isMaximized) {
+      // If already maximized, we'll set zIndex back to 0 after animation
+      // This will be done in onAnimationComplete
+    } else {
+      setZIndex(99); // Otherwise, bring the card to the front immediately
+    }
   };
 
+  const maximizedStyle = {
+    inset: 0,
+    position: 'absolute',
+    borderRadius: 0,
+    overflow: 'hidden',
+    zIndex,
+  };
 
+  const handleAnimationComplete = () => {
+    // Reset z-index to 0 after the animation if the card is not maximized
+    console.log('complete')
+    if (!isMaximized) {
+      setZIndex(0);
+    }
+  };
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     // Get mouse coordinates relative to the page
@@ -73,21 +94,26 @@ const HoverCard = ({ i }: { i: number }) => {
         {/** Main motion div, grows and shrinks on hover, on click grows to full screen **/}
         <motion.div
           onMouseMove={handleMouseMove}
+          whileHover={{cursor: 'pointer'}}
           layout={true}
           transition={trans}
           onMouseLeave={handleMouseLeave}
           initial={{
             rotateX: 0,
             rotateY: 0,
-            transformPerspective: 1000
+            transformPerspective: 1000,
+            borderRadius: '8px'
           }}
           animate={{
             rotateX: isMaximized ? 0 : rx,
             rotateY: isMaximized ? 0 : ry,
+            borderRadius: isMaximized ? 0 : '8px',
             transformPerspective: 1000
           }}
-          className={`rounded-[8px] ${message[i]}   h-full p-4 ${isMaximized ? 'maximized' : ''}`}
-          onClick={() => handleClick()}
+          style = {isMaximized ? maximizedStyle : {}}
+          onClick={handleClick}
+          onAnimationComplete={handleAnimationComplete}
+          className={`${message[i]}   h-full p-4 }`}
         >
           {/** Inner Content, shifts position with same transition speed **/}
           <motion.div
@@ -96,7 +122,7 @@ const HoverCard = ({ i }: { i: number }) => {
             className="text-white">
             {message[i]}</motion.div>
         </motion.div>
-      </div>
+      </div >
     </>
   )
 }
