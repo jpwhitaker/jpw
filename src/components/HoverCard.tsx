@@ -7,7 +7,7 @@ const HoverCard = ({ i }: { i: number }) => {
 
   const message = ['bg-red-400', 'bg-blue-400', 'bg-green-400', 'bg-purple-400', 'bg-orange-400', 'bg-pink-400', 'bg-yellow-400', ''];
 
-  const containerStyle = isMaximized ? 'fixed inset-0 z-50' : ' aspect-[16/9]';
+  const containerStyle = isMaximized ? 'fixed inset-0 z-50 ' : ' aspect-[16/9]';
   const motionDivStyle = isMaximized ? 'h-screen w-screen' : 'h-full';
 
   return (
