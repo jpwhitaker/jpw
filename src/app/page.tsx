@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image'
-import HoverCard from '@/components/HoverCard';
+import Card from '@/components/Card';
 
 
 export default function Home() {
@@ -19,7 +19,7 @@ const Divs = () => {
   return (
     <>
       {Array.from({ length: 8 }, (_, i) => (
-        <HoverCard key={i} i={i}></HoverCard>
+        <Card key={i} i={i} children={undefined}></Card>
       ))}
     </>
   )
