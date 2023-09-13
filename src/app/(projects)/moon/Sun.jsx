@@ -1,6 +1,6 @@
 import { useControls, Leva, useCreateStore } from "leva";
 import { useEffect, useRef } from "react";
-const Sun = ({ store }) => {
+const Sun = ({ store, hawaiianMoonPhase }) => {
   const light = useRef();
 
   const { intensity, moonPhase } = useControls(
@@ -43,16 +43,22 @@ const Sun = ({ store }) => {
     "waning-crescent-moon": () => thetaCalc(7 / 8),
   };
 
+  const hawaiianMoonRotationFunction = (hawaiianMoonPhase) => {
+    return (thetaCalc(hawaiianMoonPhase/30))
+  }
+
   useEffect(() => {
     if (light.current) {
       const initialX = 0;
       const initialZ = -1.5;
-      const theta = rotationFunctions[moonPhase]();
+      // const theta = rotationFunctions[moonPhase]();
+      const theta = hawaiianMoonRotationFunction(hawaiianMoonPhase);
+      console.log(hawaiianMoonPhase)
       
       light.current.position.x = initialX * Math.cos(theta) - initialZ * Math.sin(theta);
       light.current.position.z = initialX * Math.sin(theta) + initialZ * Math.cos(theta);
     }
-  }, [moonPhase]);
+  }, [hawaiianMoonPhase]);
   
 
   return (
