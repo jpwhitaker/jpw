@@ -16,7 +16,7 @@ const Sun = ({ store }) => {
         options: [
           "new-moon",
           "waxing-crescent-moon",
-          "quarter-moon",
+          "first-quarter-moon",
           "waxing-gibbous-moon",
           "full-moon",
           "waning-gibbous-moon",
@@ -34,11 +34,11 @@ const Sun = ({ store }) => {
 
   const rotationFunctions = {
     "new-moon": () => thetaCalc(0),
-    "waxing-crescent-moon": () => thetaCalc(1 / 8),
-    "quarter-moon": () => thetaCalc(2 / 8),
+    "waxing-crescent-moon": () => thetaCalc(1.5 / 8),
+    "first-quarter-moon": () => thetaCalc(2 / 8),
     "waxing-gibbous-moon": () => thetaCalc(3 / 8),
     "full-moon": () => thetaCalc(4 / 8),
-    "waning-gibbous-moon": () => thetaCalc(5 / 8),
+    "waning-gibbous-moon": () => thetaCalc(5.5 / 8),
     "last-quarter-moon": () => thetaCalc(6 / 8),
     "waning-crescent-moon": () => thetaCalc(7 / 8),
   };

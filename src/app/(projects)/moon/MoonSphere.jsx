@@ -19,7 +19,7 @@ export const MoonSphere = () => {
 
   return (
     <>
-      <Sphere args={[0.5, 160, 30]} material={material} castShadow receiveShadow />
+      <Sphere args={[0.5, 160, 30]} material={material} castShadow receiveShadow  />
     </>
   );
 };
