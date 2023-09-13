@@ -19,7 +19,7 @@ const Divs = () => {
   return (
     <>
       {Array.from({ length: 8 }, (_, i) => (
-        <Card key={i} i={i} children={undefined}></Card>
+        <Card key={i} i={i}></Card>
       ))}
     </>
   )

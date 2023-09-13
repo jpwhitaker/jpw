@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/server": "^11.11.0",
+    "@mantine/core": "^6.0.20",
+    "@mantine/hooks": "^6.0.20",
+    "@mantine/next": "^6.0.20",
     "@react-three/drei": "^9.83.9",
     "@react-three/fiber": "^8.14.1",
     "@types/node": "20.5.3",

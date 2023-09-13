@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, MouseEvent } from 'react';
 import { motion, AnimatePresence, Transition } from 'framer-motion';
 import styles from './HoverCard.module.css';
 
-const HoverCard = ({ i, children }: { i: number; children: React.ReactNode | null}) => {
+const HoverCard = ({ i }: { i: number; }) => {
   const [isMaximized, setIsMaximized] = useState<boolean>(false);
   const [zIndex, setZIndex] = useState('z-[0]');
 

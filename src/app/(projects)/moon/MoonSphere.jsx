@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import * as THREE from "three";
 
 export const MoonSphere = () => {
+  //CAUSES pagedata-script.js:1 CaptureThumbnail error TypeError: a.getContext(...).drawWindow is not a function
   const [moon_color, moon_height] = useTexture(["./moon_color.jpg", "./moon_height.jpg"]);
 
   // Create the material using useMemo

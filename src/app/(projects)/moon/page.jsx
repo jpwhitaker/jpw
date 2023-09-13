@@ -13,7 +13,7 @@ export default function Moon() {
     ambientIntensity: { value: 0.2, min: 0, max: 1, step: 0.01 },
   }, { store });
   return (
-    <div id="canvas-container" className="h-full">
+    <div id="canvas-container" className="h-full text-white">
       <Leva store={store}/>
       <Canvas>
         <CameraControls />
