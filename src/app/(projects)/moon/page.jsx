@@ -36,7 +36,7 @@ export default function Moon() {
   );
 }
 
-const PhaseSlider = ({setMoonPhase}) => {
+const PhaseSlider = ({ setMoonPhase }) => {
   const PHASES = [
     { value: 1, label: 'Hilo' },
     { value: 2, label: 'Hoaka' },
@@ -69,19 +69,48 @@ const PhaseSlider = ({setMoonPhase}) => {
     { value: 29, label: 'Mauli' },
     { value: 30, label: 'Muku' }
   ];
+
+  const ANAHULU = [
+    { value: 1, label: 'HO‘ONUI (Rising)' },
+    { value: 11, label: 'POEPOE (rounding, full)' },
+    { value: 21, label:  'EMI (diminishing)'},
+  ]
+
   return (
     <Slider
       label={(val) => {
         console.log(val)
         return (PHASES.find((mark) => mark.value === val).label)
       }}
+      labelAlwaysOn
       defaultValue={1}
       onChange={setMoonPhase}
+      size={'lg'}
       step={1}
       min={1}
       max={30}
       marks={PHASES}
-      styles={{ markLabel: { display: 'none' } }}
+      color="rgb(250 250 249)"
+      styles={{ 
+        markLabel: { display: 'none' },
+        track: {
+          '::before':{
+            backgroundColor: 'rgb(55 65 81)'
+          }
+        },
+        bar: {
+          backgroundColor: 'rgb(100 116 139)'
+        },
+        thumb: {
+          borderColor: 'rgb(100 116 139)',
+        },
+        mark: {
+          borderColor: 'rgb(55 65 81)',
+        },
+        markFilled: {
+          borderColor: 'rgb(100 116 139)',
+        }
+      }}
     />
   )
 }
