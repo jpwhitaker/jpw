@@ -1,5 +1,7 @@
 /* styles.css */
-
+body {
+  background-color: black !important;
+}
 .overlay {
   position: absolute;
   top: 0;
