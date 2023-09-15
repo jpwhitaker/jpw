@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 export const MoonSphere = () => {
   //CAUSES pagedata-script.js:1 CaptureThumbnail error TypeError: a.getContext(...).drawWindow is not a function
-  const [moon_color, moon_height] = useTexture(["./moon_color.jpg", "./moon_height.jpg"]);
+  const [moon_color, moon_height] = useTexture(["./moon_color_sm.jpeg", "./moon_height_sm.jpeg"]);
 
    // Create a ref to your sphere mesh
    const meshRef = useRef();
