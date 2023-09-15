@@ -2,7 +2,7 @@
 body {
   background-color: black !important;
 }
-.overlay {
+/* .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -21,4 +21,4 @@ body {
   margin-bottom: 20px;
   pointer-events: auto;
   
-}
+} */

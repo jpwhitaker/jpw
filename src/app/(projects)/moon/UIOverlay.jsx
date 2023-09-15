@@ -1,57 +1,36 @@
-import { Slider, MantineProvider } from "@mantine/core"
+import { Slider, MantineProvider } from "@mantine/core";
+import {PHASES} from './Phases'
+
 
 
 
 const UIOverlay = ({ moonPhase, setMoonPhase }) => {
+
   return (
     <>
-        <MantineProvider
-          withNormalizeCSS
-          withGlobalStyles
-        >
-          <div className="overlay">
-            <div className="segmented-container w-full px-12">
-              <PhaseSlider moonPhase={moonPhase} setMoonPhase={setMoonPhase} />
-            </div>
+      <MantineProvider
+        withNormalizeCSS
+        withGlobalStyles
+      >
+        <div className="absolute inset-0 z-50 flex flex-col justify-end items-center pointer-events-none p-4">
+          {/* New Div in Top Right Corner */}
+          <div className="absolute top-0 left-0 w-full lg:w-1/4 max-w-full border border-white rounded bg-slate-900/75 pointer-events-auto p-4">
+            <div className="text-lg">Moon</div>
+            <p>{PHASES[moonPhase - 1].label}</p>
+            <p class="text-sm text-gray-300">{PHASES[moonPhase - 1].description}</p>
           </div>
-        </MantineProvider>
+
+          <div className="w-full px-12 mb-5 pointer-events-auto">
+            <PhaseSlider moonPhase={moonPhase} setMoonPhase={setMoonPhase} />
+          </div>
+        </div>
+      </MantineProvider>
     </>
   )
 }
 
+
 const PhaseSlider = ({ moonPhase, setMoonPhase }) => {
-  const PHASES = [
-    { value: 1, label: 'Hilo' },
-    { value: 2, label: 'Hoaka' },
-    { value: 3, label: 'Kukahi' },
-    { value: 4, label: 'Kulua' },
-    { value: 5, label: 'Kukolu' },
-    { value: 6, label: 'Kupau' },
-    { value: 7, label: '‘Olekukahi' },
-    { value: 8, label: '‘Olekulua' },
-    { value: 9, label: '‘Olekukolu' },
-    { value: 10, label: '‘Olepau' },
-    { value: 11, label: 'Huna' },
-    { value: 12, label: 'Mohalu' },
-    { value: 13, label: 'Hua' },
-    { value: 14, label: 'Akua' },
-    { value: 15, label: 'Hoku' },
-    { value: 16, label: 'Mahealani' },
-    { value: 17, label: 'Kulu' },
-    { value: 18, label: 'La‘aukukahi' },
-    { value: 19, label: 'La‘aukulua' },
-    { value: 20, label: 'La‘aupau' },
-    { value: 21, label: '‘Olekukahi' },
-    { value: 22, label: '‘Olekulua' },
-    { value: 23, label: '‘Olepau' },
-    { value: 24, label: 'Kaloakukahi' },
-    { value: 25, label: 'Kaloakulua' },
-    { value: 26, label: 'Kaloapau' },
-    { value: 27, label: 'Kane' },
-    { value: 28, label: 'Lono' },
-    { value: 29, label: 'Mauli' },
-    { value: 30, label: 'Muku' }
-  ];
 
   const ANAHULU = [
     { value: 1, label: 'HO‘ONUI (Rising)' },

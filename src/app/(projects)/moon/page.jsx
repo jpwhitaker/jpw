@@ -23,7 +23,7 @@ export default function Moon() {
 
   return (
     <div id="canvas-container" className="h-full text-white">
-      <Leva store={store} collapsed />
+      <Leva store={store} collapsed hidden />
       <Canvas camera={{ position: [cameraX, cameraY, cameraZ], fov: cameraFov }}>
         <CameraUpdater cameraX={cameraX} cameraY={cameraY} cameraZ={cameraZ} cameraFov={cameraFov} />
         <ambientLight intensity={ambientIntensity} />
