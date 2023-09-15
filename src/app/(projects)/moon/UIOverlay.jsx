@@ -1,5 +1,5 @@
 import { Slider, MantineProvider } from "@mantine/core";
-import {PHASES} from './Phases'
+import { PHASES } from './Phases'
 
 
 
@@ -12,18 +12,25 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
         withNormalizeCSS
         withGlobalStyles
       >
-        <div className="absolute inset-0 z-50 flex flex-col justify-end items-center pointer-events-none p-4">
-          {/* New Div in Top Right Corner */}
-          <div className="absolute top-0 left-0 w-full lg:w-1/4 max-w-full border border-white rounded bg-slate-900/75 pointer-events-auto p-4">
-            <div className="text-lg">Moon</div>
-            <p>{PHASES[moonPhase - 1].label}</p>
-            <p class="text-sm text-gray-300">{PHASES[moonPhase - 1].description}</p>
-          </div>
+        <div className="absolute inset-0 z-50 pointer-events-none p-4">
+          {/* New Flex Wrapper */}
+          <div className="flex flex-col justify-between h-full p-4">
+            {/* New Div in Top Right Corner */}
+            <div className="self-start w-full lg:w-1/4 border border-white rounded bg-slate-900/75 pointer-events-auto p-4">
+              <div className="text-xl">Mahina</div>
+              <p>{PHASES[moonPhase - 1].label}</p>
+              <p className="text-sm text-gray-300">{PHASES[moonPhase - 1].description}</p>
+            </div>
 
-          <div className="w-full px-12 mb-5 pointer-events-auto">
-            <PhaseSlider moonPhase={moonPhase} setMoonPhase={setMoonPhase} />
+            {/* Slider at the bottom */}
+            <div className="self-center w-full px-12 mb-5 pointer-events-auto">
+              <PhaseSlider moonPhase={moonPhase} setMoonPhase={setMoonPhase} />
+            </div>
           </div>
         </div>
+
+
+
       </MantineProvider>
     </>
   )
