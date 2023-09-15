@@ -98,41 +98,41 @@ const PhaseSlider = ({ moonPhase, setMoonPhase }) => {
   )
 }
 
-const Segmented = () => {
-  return (<SegmentedControl
-    size="sm"
-    data={[
-      { label: 'React', value: 'react' },
-      { label: 'Angular', value: 'ng' },
-      { label: 'Vue', value: 'vue' },
-      { label: 'Svelte', value: 'svelte' },
-    ]}
-    classNames={{
-      root: 'bg-gray-800',
-      label: 'text-gray-400',
-      indicator: 'bg-gray-700'
-    }}
-    styles={(theme) => ({
-      control: {
-        ':not(:first-of-type)': {
-          'border-style': 'solid',
-          'border-width': '0 0 0 0.0625rem',
-          'border-color': `rgb(55 65 81)`,
-        },
-        label: {
-          '&[data-active]': {
-            'color': 'rgb(209 213 219)'
-          },
-          '&[data-active]:hover': {
-            'color': 'rgb(209 213 219)'
-          },
-          '&:hover': {
-            'color': 'rgb(209 213 219)'
-          }
-        }
-      }
-    })}
-  />)
-}
+// const Segmented = () => {
+//   return (<SegmentedControl
+//     size="sm"
+//     data={[
+//       { label: 'React', value: 'react' },
+//       { label: 'Angular', value: 'ng' },
+//       { label: 'Vue', value: 'vue' },
+//       { label: 'Svelte', value: 'svelte' },
+//     ]}
+//     classNames={{
+//       root: 'bg-gray-800',
+//       label: 'text-gray-400',
+//       indicator: 'bg-gray-700'
+//     }}
+//     styles={(theme) => ({
+//       control: {
+//         ':not(:first-of-type)': {
+//           'border-style': 'solid',
+//           'border-width': '0 0 0 0.0625rem',
+//           'border-color': `rgb(55 65 81)`,
+//         },
+//         label: {
+//           '&[data-active]': {
+//             'color': 'rgb(209 213 219)'
+//           },
+//           '&[data-active]:hover': {
+//             'color': 'rgb(209 213 219)'
+//           },
+//           '&:hover': {
+//             'color': 'rgb(209 213 219)'
+//           }
+//         }
+//       }
+//     })}
+//   />)
+// }
 
 export default UIOverlay;
