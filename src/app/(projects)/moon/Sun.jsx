@@ -1,5 +1,6 @@
 import { useControls, Leva, useCreateStore } from "leva";
 import { useEffect, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 const Sun = ({ store, hawaiianMoonPhase }) => {
   const light = useRef();
 
@@ -12,53 +13,35 @@ const Sun = ({ store, hawaiianMoonPhase }) => {
         max: 6,
         step: 0.05,
       },
-      moonPhase: {
-        options: [
-          "new-moon",
-          "waxing-crescent-moon",
-          "first-quarter-moon",
-          "waxing-gibbous-moon",
-          "full-moon",
-          "waning-gibbous-moon",
-          "last-quarter-moon",
-          "waning-crescent-moon",
-        ],
-      },
     },
     { store }
   );
 
-  const thetaCalc = (num) => {
-    return 2 * Math.PI * num;
-  };
-
-  const rotationFunctions = {
-    "new-moon": () => thetaCalc(0),
-    "waxing-crescent-moon": () => thetaCalc(1.5 / 8),
-    "first-quarter-moon": () => thetaCalc(2 / 8),
-    "waxing-gibbous-moon": () => thetaCalc(3 / 8),
-    "full-moon": () => thetaCalc(4 / 8),
-    "waning-gibbous-moon": () => thetaCalc(5.5 / 8),
-    "last-quarter-moon": () => thetaCalc(6 / 8),
-    "waning-crescent-moon": () => thetaCalc(7 / 8),
-  };
-
   const hawaiianMoonRotationFunction = (hawaiianMoonPhase) => {
-    return (thetaCalc(hawaiianMoonPhase/30))
-  }
+    return (2 * Math.PI * hawaiianMoonPhase / 30);
+  };
+
+  // Initialize target position with the same initial position
+  const targetPosition = useRef([0, 0, -1.5]);
 
   useEffect(() => {
-    if (light.current) {
-      const initialX = 0;
-      const initialZ = -1.5;
-      // const theta = rotationFunctions[moonPhase]();
-      const theta = hawaiianMoonRotationFunction(hawaiianMoonPhase);
-      console.log(hawaiianMoonPhase)
-      
-      light.current.position.x = initialX * Math.cos(theta) - initialZ * Math.sin(theta);
-      light.current.position.z = initialX * Math.sin(theta) + initialZ * Math.cos(theta);
-    }
+    const initialX = 0;
+    const initialZ = -1.5;
+    const theta = hawaiianMoonRotationFunction(hawaiianMoonPhase);
+
+    targetPosition.current[0] = initialX * Math.cos(theta) - initialZ * Math.sin(theta);
+    targetPosition.current[2] = initialX * Math.sin(theta) + initialZ * Math.cos(theta);
   }, [hawaiianMoonPhase]);
+
+  useFrame(() => {
+    if (light.current) {
+      //TODO I'd like to change from LERP to something else, right now it always goes the shortest path, but it should go clockwise if going up, and counter if going down.  transitions from hilo to mahealani dont even revolve.
+      // Lerp each coordinate
+      const lerpFactor = 0.05; // Adjust this value for faster or slower lerping
+      light.current.position.x += (targetPosition.current[0] - light.current.position.x) * lerpFactor;
+      light.current.position.z += (targetPosition.current[2] - light.current.position.z) * lerpFactor;
+    }
+  });
   
 
   return (

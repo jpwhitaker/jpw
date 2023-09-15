@@ -6,21 +6,26 @@ import Sun from './Sun'
 import { MoonSphere } from "./MoonSphere";
 import { SegmentedControl, Slider } from '@mantine/core';
 import './styles.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 export default function Moon() {
   const store = useCreateStore();
   const [moonPhase, setMoonPhase] = useState(1);
-  const { ambientIntensity } = useControls('Scene', {
+  const { ambientIntensity, cameraX, cameraY, cameraZ, cameraFov } = useControls('Scene', {
     ambientIntensity: { value: 0.2, min: 0, max: 1, step: 0.01 },
+    cameraX: { value: 0, min: -10, max: 10, step: 0.1 },
+    cameraY: { value: 0, min: -10, max: 10, step: 0.1 },
+    cameraZ: { value: 10, min: 0, max: 50, step: 0.1 },
+    cameraFov: { value: 10, min: 0, max: 50, step: 1 },
   }, { store });
 
   return (
     <div id="canvas-container" className="h-full text-white">
       <Leva store={store} />
-      <Canvas>
-        <CameraControls />
+      <Canvas camera={{ position: [cameraX, cameraY, cameraZ], fov: cameraFov }}>
+        <CameraUpdater cameraX={cameraX} cameraY={cameraY} cameraZ={cameraZ} cameraFov={cameraFov} />
+
         <Stars radius={100} depth={500} count={500} factor={4} saturation={0} speed={0.01} />
         <ambientLight intensity={ambientIntensity} />
         <MoonSphere />
@@ -28,13 +33,12 @@ export default function Moon() {
       </Canvas>
       <div className="overlay">
         <div className="segmented-container w-full px-12">
-
           <PhaseSlider setMoonPhase={setMoonPhase} />
         </div>
       </div>
     </div>
   );
-}
+};
 
 const PhaseSlider = ({ setMoonPhase }) => {
   const PHASES = [
@@ -73,7 +77,7 @@ const PhaseSlider = ({ setMoonPhase }) => {
   const ANAHULU = [
     { value: 1, label: 'HO‘ONUI (Rising)' },
     { value: 11, label: 'POEPOE (rounding, full)' },
-    { value: 21, label:  'EMI (diminishing)'},
+    { value: 21, label: 'EMI (diminishing)' },
   ]
 
   return (
@@ -91,10 +95,10 @@ const PhaseSlider = ({ setMoonPhase }) => {
       max={30}
       marks={PHASES}
       color="rgb(250 250 249)"
-      styles={{ 
+      styles={{
         markLabel: { display: 'none' },
         track: {
-          '::before':{
+          '::before': {
             backgroundColor: 'rgb(55 65 81)'
           }
         },
@@ -151,3 +155,15 @@ const Segmented = () => {
     })}
   />)
 }
+
+const CameraUpdater = ({ cameraX, cameraY, cameraZ, cameraFov }) => {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    camera.position.set(cameraX, cameraY, cameraZ);
+    camera.fov = cameraFov;
+    camera.updateProjectionMatrix();
+  }, [camera, cameraX, cameraY, cameraZ, cameraFov]);
+
+  return null;
+};
