@@ -1,6 +1,6 @@
 "use client";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { CameraControls, Stars } from "@react-three/drei";
+import { PresentationControls, Stars } from "@react-three/drei";
 import { useControls, Leva, useCreateStore } from "leva";
 import Sun from './Sun'
 import { MoonSphere } from "./MoonSphere";
@@ -25,10 +25,15 @@ export default function Moon() {
       <Leva store={store} />
       <Canvas camera={{ position: [cameraX, cameraY, cameraZ], fov: cameraFov }}>
         <CameraUpdater cameraX={cameraX} cameraY={cameraY} cameraZ={cameraZ} cameraFov={cameraFov} />
-
-        <Stars radius={100} depth={500} count={500} factor={4} saturation={0} speed={0.01} />
         <ambientLight intensity={ambientIntensity} />
+        <PresentationControls
+          global={true}
+          snap={true}
+          
+        >
+        <Stars radius={100} depth={100} count={5000} factor={4} saturation={0} speed={0.01} />
         <MoonSphere />
+        </PresentationControls>
         <Sun store={store} hawaiianMoonPhase={moonPhase} />
       </Canvas>
       <div className="overlay">
