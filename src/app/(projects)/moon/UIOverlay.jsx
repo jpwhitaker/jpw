@@ -16,10 +16,10 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
           {/* New Flex Wrapper */}
           <div className="flex flex-col justify-between h-full p-4">
             {/* New Div in Top Right Corner */}
-            <div className="self-start w-full lg:w-1/4 border border-white rounded bg-slate-900/75 pointer-events-auto p-4">
-              <div className="text-xl">Mahina</div>
-              <p>{PHASES[moonPhase - 1].label}</p>
-              <p className="text-sm text-gray-300">{PHASES[moonPhase - 1].description}</p>
+            <div className="self-start w-full lg:w-1/4 border border-gray-500 rounded bg-slate-900/75 pointer-events-auto p-4">
+              <div className="text-xl mb-4">{PHASES[moonPhase - 1].label}</div>
+              {/* <p></p> */}
+              <div className="text-sm text-gray-300 leading-normal [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">{PHASES[moonPhase - 1].description}</div>
             </div>
 
             {/* Slider at the bottom */}
