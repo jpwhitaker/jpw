@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 export const PHASES = [
   {
     value: 1,
@@ -562,3 +563,4 @@ export const PHASES = [
       </>)
   }
 ];
+/* eslint-enable react/no-unescaped-entities */
