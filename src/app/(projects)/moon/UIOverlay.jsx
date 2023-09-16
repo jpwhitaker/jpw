@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Slider, Accordion, MantineProvider } from "@mantine/core";
+import { IconPlus } from '@tabler/icons-react';
+
 import { PHASES } from './Phases'
 
 
@@ -21,15 +23,18 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
           {/* New Flex Wrapper */}
           <div className="flex flex-col justify-between h-full p-4">
             {/* New Div in Top Right Corner */}
-            <div className="self-start w-full  max-h-[80vh] overflow-scroll lg:w-1/4 border border-gray-500  rounded bg-slate-900/75 pointer-events-auto p-4">
+            <div className="self-start w-full  max-h-[80vh] overflow-y-scroll lg:w-1/4 border border-gray-500  rounded bg-slate-900/75 pointer-events-auto p-4">
               <Accordion unstyled
+                chevron={<IconPlus size="1.2rem" />}
                 styles={{
 
                   control: {
                     width: '100%',
                     display: 'flex',
                     flexDirection: 'row-reverse',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    '-webkit-tap-highlight-color': 'transparent',
+
                   },
                   label: {
                     flex: 1
@@ -39,9 +44,10 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
                     display: 'flex',
                     alignItems: 'center',
                     marginRight: 0,
+                    transitionDuration: '0.2s',
                     transform: 'rotate(-90deg)',
                     '&[data-rotate]': {
-                      transform: 'rotate(0deg)',
+                      transform: 'rotate(-45deg)',
                     },
                   },
                 }}
