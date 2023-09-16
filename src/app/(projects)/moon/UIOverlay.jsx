@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Slider, MantineProvider } from "@mantine/core";
+import { Slider, Accordion, MantineProvider } from "@mantine/core";
 import { PHASES } from './Phases'
 
 
@@ -22,9 +22,39 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
           <div className="flex flex-col justify-between h-full p-4">
             {/* New Div in Top Right Corner */}
             <div className="self-start w-full  max-h-[80vh] overflow-scroll lg:w-1/4 border border-gray-500  rounded bg-slate-900/75 pointer-events-auto p-4">
-              <div className="text-xl mb-4">{PHASES[moonPhase - 1].label}</div>
-              {/* <p></p> */}
-              <div className="text-sm text-gray-300 leading-normal [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">{PHASES[moonPhase - 1].description}</div>
+              <Accordion unstyled
+                styles={{
+
+                  control: {
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'row-reverse',
+                    alignItems: 'center'
+                  },
+                  label: {
+                    flex: 1
+                  },
+                  chevron: {
+                    // styles added to chevron when it should rotate
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginRight: 0,
+                    transform: 'rotate(-90deg)',
+                    '&[data-rotate]': {
+                      transform: 'rotate(0deg)',
+                    },
+                  },
+                }}
+              >
+                <Accordion.Item value="customization">
+                  <Accordion.Control>
+                    <div className="text-xl text-left ">{PHASES[moonPhase - 1].label}</div>
+                  </Accordion.Control>
+                  <Accordion.Panel>
+                    <div className="text-sm text-gray-300 leading-normal mt-4 [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">{PHASES[moonPhase - 1].description}</div>
+                  </Accordion.Panel>
+                </Accordion.Item>
+              </Accordion>
             </div>
 
             {/* Slider at the bottom */}
