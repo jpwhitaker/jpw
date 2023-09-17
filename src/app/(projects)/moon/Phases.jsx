@@ -217,7 +217,7 @@ export const PHASES = [
     description: (
       <>
         <p>
-          The name, God, indicates a great moon, beautiful and well rounded.All things reproduce abundantly(ho oakua).
+          The name, God, indicates a great moon, beautiful and well rounded.All things reproduce abundantly (ho'oakua).
           Fishing is good.This is kapu night when the gods are about and offerings are made to them to increase food
           and fish.It is a day of low or high tide, hence the saying "Ha'aku'e ke kai," it may be rough, it may be calm.
         </p>
@@ -259,16 +259,17 @@ export const PHASES = [
           Root plants and bananas will be prolific, but the fruit will be small.
           It is good for trees in general and good for fishing as well.
         </p>
-        <blockquote>
-          "The night on which Kamchameha died was the night of Hoku,
+        <hr/>
+        <p>
+          "The night on which Kamehameha died was the night of Hoku,
           and for this reason, an aliʻi who was born close to this time was named Leleiōhoku."
-        </blockquote>
+        </p>
         <p className="text-right">STEVEN DESHA, 1924</p>
 
-        <blockquote>
+        <p>
           "Keʻehau, night farming, was done after sunset,
           during the bright moonlight nights of Akua, Hoku, and Mahalani."
-        </blockquote>
+        </p>
         <p className="text-right">-Z.P.K. Kalokuokamaile, 1918</p>
 
 
@@ -287,7 +288,7 @@ export const PHASES = [
           The day is liked by farmers. The tide is low and currents run strong, but fishing is good
           Mahealani is good for all work.
         </p>
-        <hr/>
+        <hr />
         <p>
           The nights of Kū, Lāʻau, Mōhalu, Hua, Hoku, Akua and Mahalani were the best nights
           in which much ʻaweoweo (red fishes) were caught.
@@ -473,13 +474,27 @@ export const PHASES = [
   {
     value: 25,
     label: 'Kaloa Kūlua',
-    description: ``
+    description: (
+      <>
+        <p>
+          The second of the nights named for Kanaloa, calm seas and fishing will be good, especially for the makaloa and 'ole shelfish.
+          Plants with long stems (banana, sugar cane) will grow long.
+        </p>
+      </>
+    )
 
   },
   {
     value: 26,
     label: 'Kaloapau',
-    description: ``
+    description: (
+      <>
+        <p>
+          The third of the three nights named for Kanaloa, calm seas and fishing will be good, especially for the makaloa and 'ole shelfish.
+          Plants with long stems (banana, sugar cane) will grow long.
+        </p>
+      </>
+    )
   },
   {
     value: 27,
@@ -492,12 +507,12 @@ export const PHASES = [
           broke the kapu, and could be readily seen, planting and fishing. According to Kepelino, it is a day of
           very low tide, "joyous for men who fish with lines and for girls who dive for sea urchins."
         </p>
-        <hr/>
+        <hr />
         <p>
           Ka wai li ula o Mana.
         </p>
         <p><em>Mirage of Mānā.</em></p>
-        <p className="text-right">Mirages were seen at Mānā on the nights of Kū and Kāne.</p>
+        <p className="text-right">-Mirages were seen at Mānā on the nights of Kū and Kāne.</p>
       </>
     )
   },
@@ -512,14 +527,14 @@ export const PHASES = [
           full bodied crops are planted, as they are kino lau or body forms of Lono. The tide is low and the seas
           calm. The "sea begins to wash back the sand that the rough sea has scooped up."
         </p>
-      <hr/>
+        <hr />
         <p>
           Lele li'ili'i ka lehu o kapuahi.
         </p>
         <p><em>The ashes of the fireplace are scattered.</em></p>
 
         <p className="text-right">
-          Said of one whose wrath sends everyone in all directions, or of a scattering of things helter-skelter.
+          -Said of one whose wrath sends everyone in all directions, or of a scattering of things helter-skelter.
           This saying came from the scattering of ashes at the sea by the kahuna 'anā'anā on the night of Kāne or Lono.
         </p>
       </>
@@ -537,7 +552,7 @@ export const PHASES = [
           day for planting. The tide is low and there is
           "a sea that gathers up and returns the sand to its place." Marriages are often performed on this day.
         </p>
-        <hr/>
+        <hr />
         <p><em>O Mauli kēia o ka lā pau.</em></p>
         <p>This is Mauli, the last day (of the lunar month).</p>
       </>

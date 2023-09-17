@@ -34,8 +34,9 @@ export default function Moon() {
         >
         <Stars radius={100} depth={150} count={5000} factor={4} saturation={0} speed={0.01} />
         <MoonSphere />
-        </PresentationControls>
         <Sun store={store} hawaiianMoonPhase={moonPhase} />
+        </PresentationControls>
+        
       </Canvas>
       <UIOverlay moonPhase={moonPhase} setMoonPhase={setMoonPhase}/>
     </div>
