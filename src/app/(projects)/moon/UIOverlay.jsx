@@ -1,73 +1,77 @@
 import { useState, useEffect } from "react";
 import { Slider, Accordion, MantineProvider } from "@mantine/core";
 import { IconPlus } from '@tabler/icons-react';
-
+import { InformationCircleIcon } from '@heroicons/react/24/outline'
 import { PHASES } from './Phases'
+import Modal from './Modal'
 
 
 
 
 const UIOverlay = ({ moonPhase, setMoonPhase }) => {
-
-
-
-
+  const [open, setOpen] = useState(false)
 
   return (
     <>
+      <Modal open={open} setOpen={setOpen} />
       <MantineProvider
         withNormalizeCSS
-        withGlobalStyles
+      // withGlobalStyles
       >
         <div className="absolute inset-0 z-50 pointer-events-none p-4">
-          {/* New Flex Wrapper */}
           <div className="flex flex-col justify-between h-full p-4">
-            {/* New Div in Top Right Corner */}
-            <div className="self-start w-full   lg:w-1/4 border border-gray-500  rounded bg-slate-900/75 pointer-events-auto">
-              <Accordion unstyled
-                className="h-full"
-                chevron={<IconPlus size="1.2rem" />}
-                styles={{
 
-                  control: {
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'row-reverse',
-                    alignItems: 'center',
-                    '-webkit-tap-highlight-color': 'transparent',
+            <div className="flex self-start w-full justify-between">
+              <div className=" w-full   lg:w-1/4 border border-gray-500  rounded bg-slate-900/75 pointer-events-auto">
+                <Accordion unstyled
+                  className="h-full"
+                  chevron={<IconPlus size="1.2rem" />}
+                  styles={{
 
-                  },
-                  label: {
-                    flex: 1
-                  },
-                  chevron: {
-                    // styles added to chevron when it should rotate
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginRight: 0,
-                    transitionDuration: '0.2s',
-                    transform: 'rotate(-90deg)',
-                    '&[data-rotate]': {
-                      transform: 'rotate(-45deg)',
+                    control: {
+                      width: '100%',
+                      display: 'flex',
+                      flexDirection: 'row-reverse',
+                      alignItems: 'center',
+                      '-webkit-tap-highlight-color': 'transparent',
+
                     },
-                  },
-                }}
-              >
-                <Accordion.Item value="customization">
-                  <Accordion.Control
-                  className="px-4 my-4">
-                    <div className="text-xl text-left ">{PHASES[moonPhase - 1].label}</div>
-                  </Accordion.Control>
-                  <Accordion.Panel
-                  className="max-h-[50vh] px-4 pb-4 overflow-auto">
-                    <div className="text-sm text-gray-300 leading-normal overflow-y-auto  h-full [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">{PHASES[moonPhase - 1].description}</div>
-                  </Accordion.Panel>
-                </Accordion.Item>
-              </Accordion>
+                    label: {
+                      flex: 1
+                    },
+                    chevron: {
+                      // styles added to chevron when it should rotate
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginRight: 0,
+                      transitionDuration: '0.2s',
+                      transform: 'rotate(-90deg)',
+                      '&[data-rotate]': {
+                        transform: 'rotate(-45deg)',
+                      },
+                    },
+                  }}
+                >
+                  <Accordion.Item value="customization">
+                    <Accordion.Control
+                      className="px-4 my-4">
+                      <div className="text-xl text-left ">{PHASES[moonPhase - 1].label}</div>
+                    </Accordion.Control>
+                    <Accordion.Panel
+                      className="max-h-[50vh] px-4 pb-4 overflow-auto">
+                      <div className="text-sm text-gray-300 leading-normal overflow-y-auto  h-full [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">{PHASES[moonPhase - 1].description}</div>
+                    </Accordion.Panel>
+                  </Accordion.Item>
+                </Accordion>
+              </div>
+              <div className="h-[3.75rem] w-[3.75rem] flex justify-end">
+                <InformationCircleIcon className="self-center my-0 h-6 w-6 text-gray-400 hover:text-gray-300 cursor-pointer pointer-events-auto" onClick={() => { setOpen(true) }} />
+              </div>
+
             </div>
 
             {/* Slider at the bottom */}
-            <div className="self-center w-full px-0 lg:px-12 mb-0 pointer-events-auto">
+            <div className="self-center w-full px-0 lg:px-12 mb-0 pointer-events-auto" >
               <PhaseSlider moonPhase={moonPhase} setMoonPhase={setMoonPhase} />
             </div>
           </div>
