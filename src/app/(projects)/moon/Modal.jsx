@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 
 export default function Modal({ open, setOpen }) {
 
@@ -111,3 +112,4 @@ export default function Modal({ open, setOpen }) {
     </Transition.Root>
   )
 }
+/* eslint-enable react/no-unescaped-entities */
