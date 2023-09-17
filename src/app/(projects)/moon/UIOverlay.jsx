@@ -23,8 +23,9 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
           {/* New Flex Wrapper */}
           <div className="flex flex-col justify-between h-full p-4">
             {/* New Div in Top Right Corner */}
-            <div className="self-start w-full  max-h-[80vh] overflow-y-scroll lg:w-1/4 border border-gray-500  rounded bg-slate-900/75 pointer-events-auto p-4">
+            <div className="self-start w-full   lg:w-1/4 border border-gray-500  rounded bg-slate-900/75 pointer-events-auto">
               <Accordion unstyled
+                className="h-full"
                 chevron={<IconPlus size="1.2rem" />}
                 styles={{
 
@@ -53,11 +54,13 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
                 }}
               >
                 <Accordion.Item value="customization">
-                  <Accordion.Control>
+                  <Accordion.Control
+                  className="px-4 my-4">
                     <div className="text-xl text-left ">{PHASES[moonPhase - 1].label}</div>
                   </Accordion.Control>
-                  <Accordion.Panel>
-                    <div className="text-sm text-gray-300 leading-normal mt-4 [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">{PHASES[moonPhase - 1].description}</div>
+                  <Accordion.Panel
+                  className="max-h-[50vh] px-4 pb-4 overflow-auto">
+                    <div className="text-sm text-gray-300 leading-normal overflow-y-auto  h-full [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">{PHASES[moonPhase - 1].description}</div>
                   </Accordion.Panel>
                 </Accordion.Item>
               </Accordion>
