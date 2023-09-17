@@ -5,18 +5,29 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline'
 import { PHASES } from './Phases'
 import Modal from './Modal'
 
-
-
-
 const UIOverlay = ({ moonPhase, setMoonPhase }) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+
+  // Hook to set the opacity to 1 after DOM content is loaded
+  useEffect(() => {
+    const overlay = document.getElementById('overlay-div');
+    if (overlay) {
+      overlay.style.opacity = '1';
+    }
+  }, []);
 
   return (
-    <>
+    <div
+      id="overlay-div"
+      style={{
+        opacity: 0,
+        transition: 'opacity 0.5s'
+      }}
+    >
       <Modal open={open} setOpen={setOpen} />
       <MantineProvider
-        withNormalizeCSS
-      // withGlobalStyles
+        // withNormalizeCSS
+        // withGlobalStyles
       >
         <div className="absolute inset-0 z-50 pointer-events-none p-4">
           <div className="flex flex-col justify-between h-full p-4">
@@ -80,7 +91,7 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
 
 
       </MantineProvider>
-    </>
+    </div>
   )
 }
 
