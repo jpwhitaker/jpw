@@ -47,7 +47,7 @@ export const PHASES = [
   },
   {
     value: 3,
-    label: 'Kukahi',
+    label: 'Kūkahi',
     description: (
       <>
         <p>
@@ -71,7 +71,7 @@ export const PHASES = [
   },
   {
     value: 4,
-    label: 'Kulua',
+    label: 'Kūlua',
     description: (
       <>
         <p>
@@ -82,7 +82,7 @@ export const PHASES = [
   },
   {
     value: 5,
-    label: 'Kukolu',
+    label: 'Kūkolu',
     description:
       (<>
         <p>
@@ -177,7 +177,7 @@ export const PHASES = [
   },
   {
     value: 12,
-    label: 'Mohalu',
+    label: 'Mōhalu',
     description: (
       <>
         <p>Mōhalu is a night sacred to Kāne, the life giver. Fruits, fish, and limu (seaweed) are thus kapu.
@@ -330,7 +330,7 @@ export const PHASES = [
   },
   {
     value: 18,
-    label: 'La‘au Kukahi',
+    label: 'La‘au Kūkahi',
     description: (
       <>
         <p>
@@ -354,7 +354,7 @@ export const PHASES = [
   },
   {
     value: 19,
-    label: 'La‘au kulua',
+    label: 'La‘au kūlua',
     description: (
       <>
         <p>
@@ -402,7 +402,7 @@ export const PHASES = [
   },
   {
     value: 21,
-    label: '‘Olekukahi',
+    label: '‘Olekūkahi',
     description: (
       <>
         <p>
@@ -455,7 +455,7 @@ export const PHASES = [
   },
   {
     value: 24,
-    label: 'Kaloa Kukahi',
+    label: 'Kaloa Kūkahi',
     description: (
       <>
         <p>
@@ -473,7 +473,7 @@ export const PHASES = [
   },
   {
     value: 25,
-    label: 'Kaloa Kulua',
+    label: 'Kaloa Kūlua',
     description: (
       <>
         <p>

@@ -4,17 +4,11 @@ import { IconPlus } from '@tabler/icons-react';
 import { InformationCircleIcon } from '@heroicons/react/24/outline'
 import { PHASES } from './Phases'
 import Modal from './Modal'
-import localFont from 'next/font/local'
-
-const yamas = localFont({
-  src: '../../../../public/TAYYamas.woff',
-  display: 'swap',
-  variable: '--font-yamas',
-})
 
 const UIOverlay = ({ moonPhase, setMoonPhase }) => {
   const [open, setOpen] = useState(false);
 
+  // Hook to set the opacity to 1 after DOM content is loaded
   useEffect(() => {
     const overlay = document.getElementById('overlay-div');
     if (overlay) {
@@ -31,36 +25,34 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
       }}
     >
       <Modal open={open} setOpen={setOpen} />
-      <MantineProvider>
+      <MantineProvider
+        // withNormalizeCSS
+        // withGlobalStyles
+      >
         <div className="absolute inset-0 z-50 pointer-events-none p-4">
           <div className="flex flex-col justify-between h-full p-4">
-            {/* Info Icon positioned absolutely */}
-            <div className="absolute top-4 right-4 z-50">
-              <InformationCircleIcon 
-                className="h-9 w-9 text-gray-400 mt-8 mr-4 hover:text-gray-300 cursor-pointer pointer-events-auto" 
-                onClick={() => { setOpen(true) }} 
-              />
-            </div>
 
-            <div className="flex self-start w-full">
-              <div className="w-full lg:w-2/3 xl:w-1/4 pointer-events-auto">
+            <div className="flex self-start w-full justify-between">
+              <div className=" w-full   lg:w-1/4 border border-gray-500  rounded bg-slate-900/75 pointer-events-auto">
                 <Accordion unstyled
-                  defaultValue={['customization']}
                   className="h-full"
-                  chevron={<IconPlus size="1.8rem" />}
+                  chevron={<IconPlus size="1.2rem" />}
                   styles={{
+                    
                     control: {
                       width: '100%',
                       display: 'flex',
                       flexDirection: 'row-reverse',
                       alignItems: 'center',
                       '-webkit-tap-highlight-color': 'transparent',
+
                     },
                     label: {
                       flex: 1
                     },
                     chevron: {
-                      display: 'none',
+                      // styles added to chevron when it should rotate
+                      display: 'flex',
                       alignItems: 'center',
                       marginRight: 0,
                       transitionDuration: '0.2s',
@@ -72,26 +64,32 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
                   }}
                 >
                   <Accordion.Item value="customization">
-                    <Accordion.Control className="px-4 my-4">
-                      <div className={`${yamas.variable} font-yamas text-8xl text-left tracking-wide text-slate-500`}>
-                        {PHASES[moonPhase - 1].label.toLocaleLowerCase()}
-                      </div>
+                    <Accordion.Control
+                      className="px-4 my-4">
+                      <div className="text-xl text-left ">{PHASES[moonPhase - 1].label}</div>
                     </Accordion.Control>
-                    <Accordion.Panel className="px-6 pb-6 bg-black bg-opacity-40 backdrop-blur-md rounded-md">
-                      <div className="text-lg leading-relaxed tracking-wide font-light text-slate-300 overflow-y-auto h-full [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">
-                        {PHASES[moonPhase - 1].description}
-                      </div>
+                    <Accordion.Panel
+                      className="max-h-[50vh] px-4 pb-4 overflow-auto">
+                      <div className="text-sm text-gray-300 leading-normal overflow-y-auto  h-full [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">{PHASES[moonPhase - 1].description}</div>
                     </Accordion.Panel>
                   </Accordion.Item>
                 </Accordion>
               </div>
+              <div className="h-[3.75rem] w-[3.75rem] flex justify-end">
+                <InformationCircleIcon className="self-center my-0 h-6 w-6 text-gray-400 hover:text-gray-300 cursor-pointer pointer-events-auto" onClick={() => { setOpen(true) }} />
+              </div>
+
             </div>
 
+            {/* Slider at the bottom */}
             <div className="self-center w-full px-0 lg:px-12 mb-0 pointer-events-auto" >
               <PhaseSlider moonPhase={moonPhase} setMoonPhase={setMoonPhase} />
             </div>
           </div>
         </div>
+
+
+
       </MantineProvider>
     </div>
   )
