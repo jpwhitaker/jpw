@@ -5,12 +5,16 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline'
 import { PHASES } from './Phases'
 import Modal from './Modal'
 import localFont from 'next/font/local'
+import { Montserrat } from "next/font/google";
 
 const yamas = localFont({
   src: '../../../../public/TAYYamas.woff',
   display: 'swap',
   variable: '--font-yamas',
 })
+
+const montserrat = Montserrat({ subsets: ["latin"] });
+
 
 const UIOverlay = ({ moonPhase, setMoonPhase }) => {
   const [open, setOpen] = useState(false);
@@ -78,7 +82,7 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
                       </div>
                     </Accordion.Control>
                     <Accordion.Panel className="px-6 pb-6 bg-black bg-opacity-40 backdrop-blur-md rounded-md">
-                      <div className="text-lg leading-relaxed tracking-wide font-light text-slate-300 overflow-y-auto h-full [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500">
+                      <div className={`${montserrat.className} text-lg leading-relaxed tracking-wide font-light text-slate-300 overflow-y-auto h-full [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500`}>
                         {PHASES[moonPhase - 1].description}
                       </div>
                     </Accordion.Panel>
@@ -163,41 +167,5 @@ const PhaseSlider = ({ moonPhase, setMoonPhase }) => {
   )
 }
 
-// const Segmented = () => {
-//   return (<SegmentedControl
-//     size="sm"
-//     data={[
-//       { label: 'React', value: 'react' },
-//       { label: 'Angular', value: 'ng' },
-//       { label: 'Vue', value: 'vue' },
-//       { label: 'Svelte', value: 'svelte' },
-//     ]}
-//     classNames={{
-//       root: 'bg-gray-800',
-//       label: 'text-gray-400',
-//       indicator: 'bg-gray-700'
-//     }}
-//     styles={(theme) => ({
-//       control: {
-//         ':not(:first-of-type)': {
-//           'border-style': 'solid',
-//           'border-width': '0 0 0 0.0625rem',
-//           'border-color': `rgb(55 65 81)`,
-//         },
-//         label: {
-//           '&[data-active]': {
-//             'color': 'rgb(209 213 219)'
-//           },
-//           '&[data-active]:hover': {
-//             'color': 'rgb(209 213 219)'
-//           },
-//           '&:hover': {
-//             'color': 'rgb(209 213 219)'
-//           }
-//         }
-//       }
-//     })}
-//   />)
-// }
 
 export default UIOverlay;

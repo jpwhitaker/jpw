@@ -25,7 +25,7 @@ export default function Moon() {
     <div id="canvas-container" className="h-full text-white">
       <Leva store={store} collapsed hidden />
       <UIOverlay moonPhase={moonPhase} setMoonPhase={setMoonPhase}/>
-      <Canvas camera={{ position: [cameraX, cameraY, cameraZ], fov: cameraFov }}>
+      <Canvas className="touch-none" camera={{ position: [cameraX, cameraY, cameraZ], fov: cameraFov }}>
         <CameraUpdater cameraX={cameraX} cameraY={cameraY} cameraZ={cameraZ} cameraFov={cameraFov} />
         <ambientLight intensity={ambientIntensity} />
         <PresentationControls
