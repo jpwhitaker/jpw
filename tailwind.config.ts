@@ -15,6 +15,7 @@ const config: Config = {
       },
       fontFamily: {
         yamas: ['var(--font-yamas)'],
+        makawao: ['var(--font-makawao)'],
       },
     },
   },

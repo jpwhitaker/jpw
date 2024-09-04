@@ -12,12 +12,18 @@ const yamas = localFont({
   display: 'swap',
   variable: '--font-yamas',
 })
+const makawao = localFont({
+  src: '../../../../public/TAYMakawao.woff',
+  display: 'swap',
+  variable: '--font-makawao',
+})
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 
 const UIOverlay = ({ moonPhase, setMoonPhase }) => {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState("open");
 
   useEffect(() => {
     const overlay = document.getElementById('overlay-div');
@@ -39,17 +45,18 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
         <div className="absolute inset-0 z-50 pointer-events-none p-4">
           <div className="flex flex-col justify-between h-full p-4">
             {/* Info Icon positioned absolutely */}
-            <div className="absolute top-4 right-4 z-50">
-              <InformationCircleIcon 
-                className="h-9 w-9 text-gray-400 mt-8 mr-4 hover:text-gray-300 cursor-pointer pointer-events-auto" 
-                onClick={() => { setOpen(true) }} 
+            <div className="absolute top-6 right-4  z-50">
+              <InformationCircleIcon
+                className="h-9 w-9 text-gray-400 mt-8 mr-4 hover:text-gray-300 cursor-pointer pointer-events-auto"
+                onClick={() => { setOpen(true) }}
               />
             </div>
 
             <div className="flex self-start w-full">
-              <div className="w-full lg:w-2/3 xl:w-1/4 pointer-events-auto">
+              <div className="w-full  pointer-events-auto">
                 <Accordion unstyled
-                  defaultValue={['customization']}
+                expanded={expanded}
+                  defaultValue={'open'}
                   className="h-full"
                   chevron={<IconPlus size="1.8rem" />}
                   styles={{
@@ -67,6 +74,7 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
                       display: 'none',
                       alignItems: 'center',
                       marginRight: 0,
+                      color: 'rgb(163 163 163)',
                       transitionDuration: '0.2s',
                       transform: 'rotate(-90deg)',
                       '&[data-rotate]': {
@@ -75,14 +83,49 @@ const UIOverlay = ({ moonPhase, setMoonPhase }) => {
                     },
                   }}
                 >
-                  <Accordion.Item value="customization">
-                    <Accordion.Control className="px-4 my-4">
-                      <div className={`${yamas.variable} font-yamas text-8xl text-left tracking-wide text-slate-500`}>
-                        {PHASES[moonPhase - 1].label.toLocaleLowerCase()}
+                  <Accordion.Item value="open">
+                    <Accordion.Control className="px-6 my-6 flex items-center">
+                      <div
+                        key={PHASES[moonPhase - 1].label}
+                        className={`
+          ${makawao.variable} 
+          font-makawao 
+          text-6xl md:text-8xl 
+          text-left 
+          tracking-wide 
+          text-zinc-300
+          hover:text-zinc-50
+          overflow-hidden
+          text-ellipsis
+          whitespace-nowrap
+          mb-[-1.4rem]
+        `}
+                      >
+                        {PHASES[moonPhase - 1].label.toLowerCase()}
                       </div>
                     </Accordion.Control>
-                    <Accordion.Panel className="px-6 pb-6 bg-black bg-opacity-40 backdrop-blur-md rounded-md">
-                      <div className={`${montserrat.className} text-lg leading-relaxed tracking-wide font-light text-slate-300 overflow-y-auto h-full [&>p]:mb-2 [&>hr]:my-4 [&>hr]:mb-4 divide-gray-500`}>
+                    <Accordion.Panel 
+                    className="px-6 pb-6 bg-black bg-opacity-40 backdrop-blur-md rounded-md 
+                    lg:w-2/3 2xl:w-1/4"
+                    onClick={()=>{
+                      //doesnt work
+                      setExpanded(undefined)
+                    }}
+                    >
+                      <div className={`
+        ${montserrat.className} 
+        text-lg 
+        leading-relaxed 
+        tracking-wide 
+        font-light 
+        text-slate-300 
+        overflow-y-auto 
+        h-full 
+        [&>p]:mb-2 
+        [&>hr]:my-4 
+        [&>hr]:mb-4 
+        divide-gray-500
+      `}>
                         {PHASES[moonPhase - 1].description}
                       </div>
                     </Accordion.Panel>
@@ -130,7 +173,7 @@ const PhaseSlider = ({ moonPhase, setMoonPhase }) => {
   return (
     <Slider
       label={(val) => {
-        console.log(val)
+        // console.log(val)
         return (PHASES.find((mark) => mark.value === val).label)
       }}
       className=""
